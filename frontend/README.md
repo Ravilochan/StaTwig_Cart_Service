@@ -1,9 +1,28 @@
-# Cart_Service Frontend
+# Cart_service_Frontend
+This is Service which enables User's to add Ideas and store them in cart. To Checkout & but that Idea. This is just a phase before paying/buying for an Idea. 
+A User can add an available IDea to the cart and proceed to Checkout.
+
 This Service Frontend is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+# Installation
+Clone this repository into your local 
+
+```bash
+git clone https://github.com/Ravilochan/cart-service.git
+```
+Go to that directory
+```bash
+cd <directory-name>
+```
+Install all Dependencies for Node to run . You need to have Node , npm already installed in your computer to run this command
+
+```bash
+npm install
+```
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, To start the frontend
 
 ### `yarn start` or `npm start`
 
@@ -63,10 +82,12 @@ https://facebook.github.io/create-react-app/docs/code-splitting
 
 # Usage
 This service can list all the ideas stored in the cart of a user , remove an idea from cart of a user, clear the cart and confirm ideas in the cart and checkout.
-### Listing all th ideas
+### Listing all the ideas
 `/cart` --> List of all the ideas in the cart of a user
 
+### Checkout Page
 `/chechout` --> CheckOut page confirming your ideas before going into the payment service
 
+### Root Page
 `/` --> Home ? Root Page of the Whole frontend
 
