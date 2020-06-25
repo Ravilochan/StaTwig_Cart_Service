@@ -65,3 +65,8 @@ https://facebook.github.io/create-react-app/docs/code-splitting
 This service can list all the ideas stored in the cart of a user , remove an idea from cart of a user, clear the cart and confirm ideas in the cart and checkout.
 ### Listing all th ideas
 `/cart` --> List of all the ideas in the cart of a user
+
+`/chechout` --> CheckOut page confirming your ideas before going into the payment service
+
+`/` --> Home ? Root Page of the Whole frontend
+
