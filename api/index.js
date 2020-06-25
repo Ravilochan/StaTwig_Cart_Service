@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const User = require("./models/User");
 const Idea = require("./models/Idea");
 const MONGOURI =
-  "mongodb+srv://mern:cq3iwBBedA4paAAe@cluster0-npseq.gcp.mongodb.net/cart?retryWrites=true&w=majority";
+  "mongodb+srv://Admin:K2EVDutkj9V2Lam8@collaboratofav-7rukn.mongodb.net/FavDb?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 7000;
 const cors = require("cors");
 const app = express();
@@ -96,6 +96,24 @@ app.put("/api/uncart", (req, res) => {
     req.body.user._id,
     {
       $pull: { cart: req.body.cart._id },
+    },
+    {
+      new: true,
+    }
+  ).exec((err, result) => {
+    if (err) {
+      return res.json({ error: err });
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+app.get("/api/clearcart/:id", (req, res) => {
+  User.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: { cart: [] },
     },
     {
       new: true,
