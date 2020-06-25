@@ -1,5 +1,5 @@
 # Cart_service_Frontend
-This is Service which enables User's to add Ideas and store them in cart. To Checkout & but that Idea. This is just a phase before paying/buying for an Idea. 
+This is Service which enables User's to add Ideas and store them in cart. To Checkout ideas a phase before paying/buying for an Idea. 
 A User can add an available IDea to the cart and proceed to Checkout.
 
 This Service Frontend is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
