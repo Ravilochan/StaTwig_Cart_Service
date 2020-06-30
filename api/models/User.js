@@ -5,7 +5,6 @@ const userSchema = new mongoose.Schema({
     type: ObjectId,
     required: true,
   },
-  email: String,
   cart: [
     {
       type: ObjectId,
