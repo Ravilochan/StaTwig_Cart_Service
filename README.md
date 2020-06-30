@@ -1,6 +1,6 @@
 # cart-service
 This is Service which enables User's to add Ideas and store them in cart. To Checkout & but that Idea. This is just a phase before paying/buying for an Idea. 
-A User can add an available IDea to the cart and proceed to Checkout.
+A User can add an available Ideas to the cart and proceed to Checkout.
 
 # Installation
 Clone this repository into your local 
