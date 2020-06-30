@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
-import { getProducts, clearFromCart, id_user } from "../api";
+import { getProducts, clearFromCart, id_user, removeCartProduct } from "../api";
 
 export default class cartlist extends Component {
   constructor(props) {
@@ -13,8 +13,6 @@ export default class cartlist extends Component {
   }
 
   componentWillMount() {
-    // let id = localStorage.getItem("id");
-    // if (!id) console.log("id not there");
     getProducts().then((item) => {
       let total = 0;
       for (var i = 0; i < item.length; i++) {
@@ -25,8 +23,6 @@ export default class cartlist extends Component {
   }
 
   clearCart() {
-    // let id = localStorage.getItem("id");
-    // if (!id) return;
     clearFromCart(id_user)
       .then()
       .catch((err) => {
@@ -34,6 +30,16 @@ export default class cartlist extends Component {
       });
     this.setState({ products: [] });
   }
+  removeFromCart = (product) => {
+    const cart = {
+      user: { _id: id_user },
+      cart: { _id: product._id },
+    };
+    let prod = this.state.products.filter((item) => item._id !== product._id);
+    console.log(prod);
+    removeCartProduct(cart).then();
+    this.setState({ products: prod });
+  };
 
   render() {
     const { products, total } = this.state;
@@ -42,7 +48,11 @@ export default class cartlist extends Component {
         <h3 className="card-title">Cart</h3>
         <hr />
         {products.map((product, index) => (
-          <CartItem product={product} key={index} />
+          <CartItem
+            product={product}
+            key={index}
+            remove={this.removeFromCart}
+          />
         ))}
         <hr />
         {products.length ? (

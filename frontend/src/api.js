@@ -16,7 +16,11 @@ export function clearFromCart(id) {
 }
 
 export function removeCartProduct(cart) {
-  return axios
-    .put(`${BASE_URL}/api/uncart`, { cart })
-    .then((response) => response.data);
+  return fetch(`${BASE_URL}/api/uncart`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(cart),
+  }).then((response) => response.json());
 }
