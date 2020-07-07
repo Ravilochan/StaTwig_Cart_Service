@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const User = require("./models/User");
 const Idea = require("./models/Idea");
 const MONGOURI =
-  "mongodb+srv://Admin:K2EVDutkj9V2Lam8@collaboratofav-7rukn.mongodb.net/FavDb?retryWrites=true&w=majority";
+  "mongodb+srv://Admin:K2EVDutkj9V2Lam8@collaboratofav-7rukn.mongodb.net/CartDb?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 7000;
 const cors = require("cors");
 const app = express();
