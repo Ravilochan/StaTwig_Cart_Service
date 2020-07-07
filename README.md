@@ -1,6 +1,6 @@
 # cart-service
 This is Service which enables User's to add Ideas and store them in cart. To Checkout & but that Idea. This is just a phase before paying/buying for an Idea. 
-A User can add an available IDea to the cart and proceed to Checkout.
+A User can add an available Ideas to the cart and proceed to Checkout.
 
 # Installation
 Clone this repository into your local 
@@ -61,10 +61,14 @@ Data sending to Request in body should be like
      } 
 }
 ```
-Here the _id in user is the MongoDB UID / _id unique for every user. This shoud 12 characters and uinque and accoridng to the rules of MongoDB _id.
-Here the _id in cart is the MongoDB UID / _id unique for every Idea. This shoud 12 characters and uinque and accoridng to the rules of MongoDB _id.
-For adding an IDea to the cart - PUT Request:
-The user needs to send User detalis in "user" and Idea Details in "cart"
+Here the _id in user is the MongoDB UID / _id unique for every user. 
+
+This should be 12 characters and unique and according to the rules of MongoDB _id. Here the _id in cart is the MongoDB UID / _id unique for every Idea.
+
+This should be 12 characters and unique and according to the rules of MongoDB _id. 
+
+The values of the user and the idea are only stored when a particular user makes a request to add an item to his cart. If a user doesn’t click on add to cart / doesn’t interact with cart service in any manner until  , then there will not be that user info in the Database of Cari Service. In the same way if any user didn’t add an idea into cart anytime then that idea info is not stored in the database of cart service.
+
 
 #### Response :
 ```JSON
@@ -91,10 +95,14 @@ PUT data in Body of Request should be like
      } 
 }
 ```
-Here the _id in user is the MongoDB UID / _id unique for every user. This shoud 12 characters and uinque and accoridng to the rules of MongoDB _id.
-Here the _id in cart is the MongoDB UID / _id unique for every Idea. This shoud 12 characters and uinque and accoridng to the rules of MongoDB _id.
+Here the _id in user is the MongoDB UID / _id unique for every user. 
+
+This should be 12 characters and unique and according to the rules of MongoDB _id. Here the _id in cart is the MongoDB UID / _id unique for every Idea.
+This should be 12 characters and unique and according to the rules of MongoDB _id. 
+
 For making this PUT un-cart Request ( un-cart an Idea ) :
-The user needs to send User detalis in "user" and only Idea _id in "cart"
+
+The user needs to send User details in "user" and only Idea _id in "cart"
 #### Response :
 ```JSON
 {
@@ -143,7 +151,8 @@ http:localhost:7000/api/clearcart/5d6ede6a0ba62570afcedd3b
 ```
  
  here Params :id is the User's UID/_id from User collection. 
- Here the _id in user is the MongoDB UID / _id unique for every user. This shoud 12 characters and uinque and accoridng to the rules of MongoDB _id.
+ 
+ Here the _id in user is the MongoDB UID / _id unique for every user. This should be 12 characters and unique and according to the rules of MongoDB _id.
  
  This end point is used to clear all the available ideas present in the cart of a particular user. Here the :id which is _id of the user is used to identify the user and clear all his ideas in his cart.
  
