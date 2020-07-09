@@ -4,6 +4,7 @@ import "./App.css";
 import Checkout from "./components/Checkout";
 import Cartlist from "./components/CartList";
 import Navbar from "./components/navbar/Navbar";
+import onSuccess from "./components/onSuccess";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <br />
           <Route exact path="/cart" component={Cartlist} />
           <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/onSuccess" component={onSuccess} />
         </div>
       </div>
     </Router>

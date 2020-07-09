@@ -1,12 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { getProducts } from "../api";
+import { Link, Redirect } from "react-router-dom";
+import { getProducts, clearFromCart, id_user } from "../api";
+import Paypal from "./Paypal";
 export default class Checkout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       products: [],
       total: 0,
+      redirect: null,
     };
   }
 
@@ -19,11 +21,31 @@ export default class Checkout extends React.Component {
       this.setState({ products: item, total });
     });
   }
-
   render() {
     const { products, total } = this.state;
+
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
+    const transactionSuccess = (data) => {
+      console.log(data);
+      clearFromCart(id_user)
+        .then(() => {
+          this.setState({ products: [], redirect: "/onSuccess" });
+        })
+        .catch((err) => console.log(err));
+    };
+
+    const transactionError = () => {
+      console.log("Paypal error");
+    };
+
+    const transactionCanceled = () => {
+      console.log("Transaction canceled");
+    };
+
     return (
-      <div className=" container">
+      <div className="container">
         <h3 className="card-title">Checkout</h3>
         <hr />
         {products.map((product, index) => (
@@ -52,24 +74,27 @@ export default class Checkout extends React.Component {
         ) : (
           ""
         )}
-        {products.length ? (
-          <button
-            className="btn btn-success float-right"
-            onClick={() => alert("You have Successfully purchased ")}
-          >
-            Pay
-          </button>
-        ) : (
-          ""
-        )}
-        <Link to="/">
-          <button
-            className="btn btn-danger float-right"
-            style={{ marginRight: "10px" }}
-          >
-            Cancel
-          </button>
-        </Link>
+        <div className="row float-right">
+          {products.length ? (
+            <Paypal
+              toPay={total}
+              onSuccess={transactionSuccess}
+              transactionError={transactionError}
+              transactionCanceled={transactionCanceled}
+            />
+          ) : (
+            ""
+          )}
+          <Link to="/">
+            <button
+              className="btn btn-danger float-right"
+              style={{ marginLeft: "0.5em" }}
+            >
+              Cancel
+            </button>
+          </Link>
+        </div>
+
         <br />
         <br />
         <br />
