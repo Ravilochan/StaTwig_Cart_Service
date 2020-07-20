@@ -24,3 +24,13 @@ export function removeCartProduct(cart) {
     body: JSON.stringify(cart),
   }).then((response) => response.json());
 }
+
+export function pay(data) {
+  return fetch("http://localhost:7001/api/payment", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((response) => response.data);
+}

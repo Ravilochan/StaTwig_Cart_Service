@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { getProducts, clearFromCart, id_user } from "../api";
+import { getProducts, clearFromCart, id_user, pay } from "../api";
 import Paypal from "./Paypal";
 export default class Checkout extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ export default class Checkout extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     getProducts().then((item) => {
       let total = 0;
       for (var i = 0; i < item.length; i++) {
@@ -27,21 +27,51 @@ export default class Checkout extends React.Component {
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />;
     }
-    const transactionSuccess = (data) => {
-      console.log(data);
-      clearFromCart(id_user)
+    const transactionSuccess = (event) => {
+      event.type = "Success";
+      let transdata = {
+        user: id_user,
+        cartDetails: products,
+        paymentData: event,
+      };
+      pay(transdata)
         .then(() => {
-          this.setState({ products: [], redirect: "/onSuccess" });
+          clearFromCart(id_user)
+            .then(() => {
+              console.log("cleared cart");
+              this.setState({ products: [], redirect: "/onSuccess" });
+            })
+            .catch((err) => console.log(err));
         })
         .catch((err) => console.log(err));
     };
 
-    const transactionError = () => {
-      console.log("Paypal error");
+    const transactionError = (data) => {
+      data.type = "Error";
+      let transdata = {
+        user: id_user,
+        cartDetails: products,
+        paymentData: data,
+      };
+      pay(transdata)
+        .then(() => {
+          alert("Transaction Error");
+        })
+        .catch((err) => console.log(err));
     };
 
-    const transactionCanceled = () => {
-      console.log("Transaction canceled");
+    const transactionCanceled = (data) => {
+      data.type = "Cancelled";
+      let transdata = {
+        user: id_user,
+        cartDetails: products,
+        paymentData: data,
+      };
+      pay(transdata)
+        .then(() => {
+          alert("Transaction Cancelled");
+        })
+        .catch((err) => console.log(err));
     };
 
     return (

@@ -12,7 +12,7 @@ export default class cartlist extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     getProducts().then((item) => {
       let total = 0;
       for (var i = 0; i < item.length; i++) {
