@@ -1,4 +1,4 @@
-# cart-service
+# Cart-Service
 This is Service which enables User's to add Ideas and store them in cart. To Checkout & but that Idea. This is just a phase before paying/buying for an Idea. 
 A User can add an available Ideas to the cart and proceed to Checkout.
 
@@ -32,7 +32,7 @@ node api/index
 
 # Usage
 This Service has API endpoints at 
-```bash
+```
 /api/cart --> PUT Request
 
 /api/uncart --> PUT Request
